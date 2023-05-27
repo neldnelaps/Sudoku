@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  Sudoku
+
+  Created by Natalia Pashkova on 22.05.2023.
+  
+*/
+// MARK: Tabs
+"Daily Challenge"           ="Ежедневное испытание";
+"Main"                      ="Главная";
+"Statistics"                ="Статистика";
+
+// MARK: MainController
+"New game"                  ="Новая игра";
+"Continue game"             ="Продолжить игру";
+
+// MARK: MainController UIAlertController
+"Select difficulty"         ="Выберите сложность";
+"Light"                     ="Легкая";
+"Average"                   ="Средняя";
+"Hard"                      ="Сложная";
+"Expert"                    ="Экспертная";
+"Crazy"                     ="Безумная";
+"Start again"               ="Начать заново";
+"Cancel"                    ="Отмена";
+
+// MARK: GameViewController
+"Sudoku"                    ="Судоку";
+
+// MARK: StatisticsController
+
+// MARK: DailyChallengesController

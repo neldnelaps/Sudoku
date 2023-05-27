@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="Sudoku" customModuleProvider="target">
+            <connections>
+                <outlet property="sudokuView" destination="Zoa-Bq-rZi" id="v1N-ag-eN2"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mr-vq-0oH">
+                    <rect key="frame" x="16" y="75" width="361" height="32"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="nST-5H-zwe"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoa-Bq-rZi" customClass="SudokuView" customModule="Sudoku" customModuleProvider="target">
+                    <rect key="frame" x="16" y="115" width="361" height="361"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Zoa-Bq-rZi" secondAttribute="height" multiplier="1:1" id="9Xk-Gs-yLX"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="5MZ-Qa-NAS" appends="YES" id="NhP-nZ-BQV"/>
+                    </connections>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2Ib-al-soW">
+                    <rect key="frame" x="16" y="666" width="361" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFv-2A-hHk">
+                            <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="60"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="arrowshape.bounce.right" catalog="system"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4e-FH-Gkb">
+                            <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="60"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="eraser.line.dashed" catalog="system"/>
+                            <connections>
+                                <action selector="clearCell:" destination="-1" eventType="touchUpInside" id="lnW-e9-xl3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpe-3O-FoH">
+                            <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="60"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="lamp.desk" catalog="system"/>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="Mbb-7D-4oI"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aL6-qU-hhk">
+                    <rect key="frame" x="16" y="758" width="361" height="44"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzV-sL-MLD">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="1">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="VkV-g8-p3V"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZV-6f-GJn">
+                            <rect key="frame" x="40" y="0.0" width="40.333333333333343" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="2">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="KEB-KH-092"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5S8-1t-ZD6">
+                            <rect key="frame" x="80.333333333333329" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="3">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="9jb-gK-5hn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4L-gA-b7P">
+                            <rect key="frame" x="120.33333333333334" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="4">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="489-sm-Abl"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pzm-Dg-LGi">
+                            <rect key="frame" x="160.33333333333334" y="0.0" width="40.333333333333343" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="5">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="vOM-vm-czh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLk-v6-aGx">
+                            <rect key="frame" x="200.66666666666666" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="6">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="xQc-fG-3ZH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yD-3N-5GQ">
+                            <rect key="frame" x="240.66666666666669" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="7">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="w8j-oV-A9c"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfO-73-Sf0">
+                            <rect key="frame" x="280.66666666666669" y="0.0" width="40.333333333333314" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="8">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="WJ8-ye-KJW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RF-Rv-hsu">
+                            <rect key="frame" x="321" y="0.0" width="40" height="44"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="9">
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="UAb-Nz-hId"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="cuV-CR-DOn"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7mr-vq-0oH" secondAttribute="trailing" constant="16" id="4Y8-Qc-7S6"/>
+                <constraint firstItem="Zoa-Bq-rZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7S3-15-uly"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aL6-qU-hhk" secondAttribute="trailing" constant="16" id="Bmj-3X-kKc"/>
+                <constraint firstItem="Zoa-Bq-rZi" firstAttribute="top" secondItem="7mr-vq-0oH" secondAttribute="bottom" constant="8" id="HoA-Se-OxF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Ib-al-soW" secondAttribute="trailing" constant="16" id="Itk-ub-P1F"/>
+                <constraint firstItem="7mr-vq-0oH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="P0p-qq-swi"/>
+                <constraint firstItem="aL6-qU-hhk" firstAttribute="top" secondItem="2Ib-al-soW" secondAttribute="bottom" constant="32" id="Wjs-4r-Xew"/>
+                <constraint firstItem="7mr-vq-0oH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="YQQ-d2-cyn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Zoa-Bq-rZi" secondAttribute="trailing" constant="16" id="gS2-ZU-CpM"/>
+                <constraint firstItem="aL6-qU-hhk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="phX-3c-VPo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aL6-qU-hhk" secondAttribute="bottom" constant="16" id="snu-nz-otg"/>
+                <constraint firstItem="2Ib-al-soW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="wIV-zo-kA4"/>
+            </constraints>
+            <point key="canvasLocation" x="165.64885496183206" y="24.647887323943664"/>
+        </view>
+        <tapGestureRecognizer id="5MZ-Qa-NAS">
+            <connections>
+                <action selector="handleTap:" destination="Zoa-Bq-rZi" id="9gY-eM-MFe"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="arrowshape.bounce.right" catalog="system" width="128" height="86"/>
+        <image name="eraser.line.dashed" catalog="system" width="128" height="96"/>
+        <image name="lamp.desk" catalog="system" width="116" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
