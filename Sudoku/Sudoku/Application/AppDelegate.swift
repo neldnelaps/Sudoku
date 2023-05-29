@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         do {
-            try saveLocalStorage(save: sudoku.grid)
+            try saveLocalStorage(save: sudoku.grid) //TODO
         } catch {
             let nserror = error as NSError
             fatalError("Error: \(nserror), \(nserror.userInfo)")
@@ -59,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: -  Save files
+    // MARK: -  Save files TODO
+    
     func saveLocalStorage(save: SudokuData) throws {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let saveURL = documentsDirectory.appendingPathComponent("sudoku_save").appendingPathExtension("plist")
@@ -74,22 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
        
-    // MARK: - Load Files
-//    func loadLocalStorage() -> sudokuData {
-//        let documentsDirectory =
-//        FileManager.default.urls(for: .documentDirectory,
-//                                 in: .userDomainMask).first!
-//        let loadURL = documentsDirectory.appendingPathComponent("sudoku_save").appendingPathExtension("plist")
-//        // Decode and Load from Local Storage
-//        if let data = try? Data(contentsOf: loadURL) {
-//            let decoder = PropertyListDecoder()
-//            load = try? decoder.decode(sudokuData.self, from: data)
-//            // once loaded, delete save
-//            try? FileManager.default.removeItem(at: loadURL)
-//        }
-//
-//        return load!
-//    }
+    // MARK: - Load Files TODO
     
     func loadLocalStorage() throws -> SudokuData {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -104,14 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch let error {
             throw NSError(domain: "com.example.sudoku", code: 1, userInfo: [NSLocalizedDescriptionKey: "Error loading save data: \(error.localizedDescription)"])
         }
-    }
-    
-    // MARK: - getPuzzles
-    func getPuzzles(_ name : GameDifficulty) -> [String] {
-        guard let url = Bundle.main.url(forResource: name.rawValue, withExtension: "plist") else { return [] }
-        guard let data = try? Data(contentsOf: url) else { return [] }
-        guard let array = try? PropertyListDecoder().decode([String].self, from: data) else { return [] }
-        return array
     }
 
 }

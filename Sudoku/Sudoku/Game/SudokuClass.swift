@@ -11,13 +11,14 @@ import UIKit
 struct SudokuData: Codable {
     var gameDiff: GameDifficulty = .average
     var plistPuzzle: [[Int]] = [[Int]] (repeating: [Int] (repeating: 0, count: 9), count: 9) // the loaded puzzle
-    var pencilPuzzle: [[[Bool]]] = [[[Bool]]] (repeating: [[Bool]] (repeating: [Bool] (repeating: false, count: 10), count: 9), count: 9)       // penciled values - 3x array of booleans
-    var userPuzzle: [[Int]] = [[Int]] (repeating: [Int] (repeating: 0, count: 9), count: 9)           // user entries to puzzle
+    var pencilPuzzle: [[[Bool]]] = [[[Bool]]] (repeating: [[Bool]] (repeating: [Bool] (repeating: false, count: 10), count: 9), count: 9) // penciled values - 3x array of booleans
+    var userPuzzle: [[Int]] = [[Int]] (repeating: [Int] (repeating: 0, count: 9), count: 9)// user entries to puzzle
 }
 
 class SudokuClass {
     var inProgress = false
     var grid: SudokuData! = SudokuData()
+    var levelGrid : LevelGenerator = LevelGenerator()
     
     /// Возвращает значение true, если число в данной ячейке фиксировано (не может быть изменено пользователем).
     /// - Parameters:
@@ -43,53 +44,11 @@ class SudokuClass {
     ///   - column: Номер столбца ячейки.
     /// - Returns: true, если число конфликтует, false в противном случае.
     func isConflictingEntryAt(row : Int, column: Int) -> Bool  {
-        // get n
-        var n: Int
-        if grid.plistPuzzle[row][column] == 0 {
-            n = grid.userPuzzle[row][column]
-        } else {
-            n = grid.plistPuzzle[row][column]
+        if levelGrid.gridDefault[row][column] != grid.userPuzzle[row][column] {
+            return true
         }
-        
-        // if no value exists in entry -- no conflict
-        if n == 0 { return false }
-        
-        // check all columns - if same number as current number (except current location) -- conflict
-        for r in 0...8 {
-            if r != row && (grid.plistPuzzle[row][column] == n || grid.userPuzzle[row][column] == n) {
-                return true;
-            }
-        }
-        
-        // check all rows - if same number as current number (except current location) -- conflict
-        for c in 0...8 {
-            if c != column && (grid.plistPuzzle[row][column] == n || grid.userPuzzle[row][column] == n) {
-                return true;
-            }
-        }
-        
-        // check all 3x3s
-        // row, col = (0,0)-(8,8)
-        let threeByThreeRow : Int = row / 3 // forced division
-        let threeByThreeCol : Int = column / 3 // forced division
-        // 0-2 = 0, 3-5 = 1, 6-8 = 2  ----> 0 + (0*3), 1 + (0*3), 2 + (0*3)
-        // check rows and columns in these areas
-        let startRow = threeByThreeRow * 3
-        let startCol = threeByThreeCol * 3
-        let endRow = 2 + (threeByThreeRow * 3)
-        let endCol = 2 + (threeByThreeCol * 3)
-        for r in startRow...endRow {
-            for c in startCol...endCol {
-                // if not the original square and contains the value n -- conflict
-                if c != column && r != row && (grid.plistPuzzle[row][column] == n || grid.userPuzzle[row][column] == n) {
-                    return true
-                } // end if
-            } // end c
-        } // end r
-        
-        // no conflicts
         return false
-    } // end isConflictingEntryAt
+    }
     
     /// Записаны ли какие-либо значения в данной ячейке?
     /// - Parameters:

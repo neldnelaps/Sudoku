@@ -18,9 +18,8 @@
 		75045B422A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B412A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift */; };
 		75045B502A1A6DB800139CCD /* SudokuClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B4F2A1A6DB800139CCD /* SudokuClass.swift */; };
 		75045B522A1A6DF100139CCD /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B512A1A6DF100139CCD /* SudokuView.swift */; };
-		7560A2E32A220A8F00D4A027 /* average.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7560A2E22A220A8F00D4A027 /* average.plist */; };
-		7560A2E52A223F8200D4A027 /* hard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7560A2E42A223F8200D4A027 /* hard.plist */; };
 		7560A2E72A22504900D4A027 /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E62A22504900D4A027 /* GameDifficulty.swift */; };
+		7560A2E92A24D47400D4A027 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E82A24D47400D4A027 /* LevelGenerator.swift */; };
 		7563E8A22A1B7EEB00B23764 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A12A1B7EEB00B23764 /* MainViewController.swift */; };
 		7563E8A62A1B807700B23764 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A52A1B807700B23764 /* MainTabBarController.swift */; };
 		7563E8B32A1B817600B23764 /* DailyChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */; };
@@ -68,9 +67,8 @@
 		75045B412A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		75045B4F2A1A6DB800139CCD /* SudokuClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuClass.swift; sourceTree = "<group>"; };
 		75045B512A1A6DF100139CCD /* SudokuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
-		7560A2E22A220A8F00D4A027 /* average.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = average.plist; sourceTree = "<group>"; };
-		7560A2E42A223F8200D4A027 /* hard.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = hard.plist; sourceTree = "<group>"; };
 		7560A2E62A22504900D4A027 /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
+		7560A2E82A24D47400D4A027 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		7563E8A12A1B7EEB00B23764 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7563E8A52A1B807700B23764 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengesViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +170,7 @@
 				75045B4F2A1A6DB800139CCD /* SudokuClass.swift */,
 				75045B512A1A6DF100139CCD /* SudokuView.swift */,
 				7560A2E62A22504900D4A027 /* GameDifficulty.swift */,
+				7560A2E82A24D47400D4A027 /* LevelGenerator.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -271,8 +270,6 @@
 				75045B2C2A1A6CDC00139CCD /* Info.plist */,
 				75045B242A1A6CDC00139CCD /* Sudoku.xcdatamodeld */,
 				7563E8BD2A1B897700B23764 /* Localizable.strings */,
-				7560A2E22A220A8F00D4A027 /* average.plist */,
-				7560A2E42A223F8200D4A027 /* hard.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -429,8 +426,6 @@
 				75045B2B2A1A6CDC00139CCD /* LaunchScreen.storyboard in Resources */,
 				7563E8BB2A1B897700B23764 /* Localizable.strings in Resources */,
 				75045B282A1A6CDC00139CCD /* Assets.xcassets in Resources */,
-				7560A2E52A223F8200D4A027 /* hard.plist in Resources */,
-				7560A2E32A220A8F00D4A027 /* average.plist in Resources */,
 				757318B92A1CC5890054D3ED /* GameViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7563E8A22A1B7EEB00B23764 /* MainViewController.swift in Sources */,
+				7560A2E92A24D47400D4A027 /* LevelGenerator.swift in Sources */,
 				75045B1C2A1A6CDC00139CCD /* AppDelegate.swift in Sources */,
 				7563E8C22A1B8B7400B23764 /* String.swift in Sources */,
 				75045B262A1A6CDC00139CCD /* Sudoku.xcdatamodeld in Sources */,

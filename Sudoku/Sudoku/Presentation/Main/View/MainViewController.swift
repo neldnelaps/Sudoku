@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
     @IBAction func continueGameTapped(_ sender: UIButton) {
         // Try to load saved game data from local storage
         do {
-            let load = try appDelegate.loadLocalStorage()
+            let load = try appDelegate.loadLocalStorage() // TODO
             appDelegate.sudoku.grid = load
             self.show(GameViewController(), sender: self)
         } catch {
@@ -99,7 +99,7 @@ class MainViewController: UIViewController {
     // MARK: Alert
     func createAlert(){
         alert.addAction(UIAlertAction(title: "Light".localized(), style: .default , handler:{ (UIAlertAction)in
-            self.setupGridShow(gameDiff: .average)
+            self.setupGridShow(gameDiff: .light)
         }))
         alert.addAction(UIAlertAction(title: "Average".localized(), style: .default , handler:{ (UIAlertAction)in
             self.setupGridShow(gameDiff: .average)
@@ -108,10 +108,10 @@ class MainViewController: UIViewController {
             self.setupGridShow(gameDiff: .hard)
         }))
         alert.addAction(UIAlertAction(title: "Expert".localized(), style: .default , handler:{ (UIAlertAction)in
-            self.show(GameViewController(), sender: self)
+            self.setupGridShow(gameDiff: .expert)
         }))
         alert.addAction(UIAlertAction(title: "Crazy".localized(), style: .default , handler:{ (UIAlertAction)in
-            self.show(GameViewController(), sender: self)
+            self.setupGridShow(gameDiff: .crazy)
         }))
         alert.addAction(UIAlertAction(title: "Start again".localized(), style: .destructive , handler:{ (UIAlertAction)in
             print("User click Start again")
@@ -125,8 +125,9 @@ class MainViewController: UIViewController {
     {
         let puzzle = self.appDelegate.sudoku
         puzzle.grid.gameDiff = gameDiff
-        let array = self.appDelegate.getPuzzles(puzzle.grid.gameDiff)
-        puzzle.grid.plistPuzzle = puzzle.plistToPuzzle(plist: array[self.random(array.count)], toughness: puzzle.grid.gameDiff)
+        puzzle.levelGrid = LevelGenerator()
+        puzzle.levelGrid.gameGeneratorByDifficulty(difficulty: gameDiff)
+        puzzle.grid.plistPuzzle = puzzle.levelGrid.grid
         self.appDelegate.sudoku = puzzle
         self.show(GameViewController(), sender: self)
     }
