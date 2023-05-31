@@ -13,8 +13,6 @@ class StatisticsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Statistics".localized()
-        // Do any additional setup after loading the view.
     }
-
 
 }

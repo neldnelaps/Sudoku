@@ -15,8 +15,6 @@ class DailyChallengesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Daily Challenge".localized()
-        // Do any additional setup after loading the view.
     }
-
-
+    
 }

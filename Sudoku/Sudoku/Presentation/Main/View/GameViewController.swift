@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class GameViewController: UIViewController {
 
+    private var viewModel: GameViewModel!
+    private var bag = DisposeBag()
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var PencilOn = false
     
@@ -16,6 +20,9 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = container.resolve(GameViewModel.self)!
+        
         PencilOn = false
     }
     
@@ -24,7 +31,7 @@ class GameViewController: UIViewController {
 
         if self.isMovingFromParent {
             do {
-                try appDelegate.saveLocalStorage(save: appDelegate.sudoku.grid)//TODO
+                viewModel.saveSudoku(sudoku: appDelegate.sudoku)
             } catch {
                 let nserror = error as NSError
                 fatalError("Error \(nserror), \(nserror.userInfo)")
@@ -40,7 +47,7 @@ class GameViewController: UIViewController {
         }
         
         let grid = appDelegate.sudoku.grid
-        if grid?.userPuzzle[row][col] != 0 {
+        if grid?.userPuzzle?.rows[row].values[col] != 0 {
             appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
         }
         
@@ -65,10 +72,10 @@ class GameViewController: UIViewController {
         let col = sudokuView.selected.column
         if (row != -1 && col != -1) {
             if PencilOn == false {
-                if grid?.plistPuzzle[row][col] == 0 && grid?.userPuzzle[row][col] == 0  {
+                if grid?.plistPuzzle?.rows[row].values[col] == 0 && grid?.userPuzzle?.rows[row].values[col] == 0  {
                     appDelegate.sudoku.userGrid(n: sender.tag, row: row, col: col)
                     refresh()
-                } else if grid?.plistPuzzle[row][col] == 0 || grid?.userPuzzle[row][col] == sender.tag {
+                } else if grid?.plistPuzzle?.rows[row].values[col] == 0 || grid?.userPuzzle?.rows[row].values[col] == sender.tag {
                     appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
                     refresh()
                 }

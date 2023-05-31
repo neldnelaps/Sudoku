@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         do {
-            try saveLocalStorage(save: sudoku.grid) //TODO
+            //try saveLocalStorage(save: sudoku.grid) //TODO
         } catch {
             let nserror = error as NSError
             fatalError("Error: \(nserror), \(nserror.userInfo)")
@@ -56,39 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-        }
-    }
-    
-    // MARK: -  Save files TODO
-    
-    func saveLocalStorage(save: SudokuData) throws {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let saveURL = documentsDirectory.appendingPathComponent("sudoku_save").appendingPathExtension("plist")
-
-        guard let saveGame = try? PropertyListEncoder().encode(save) else {
-            throw NSError(domain: "com.example.sudoku", code: 1, userInfo: [NSLocalizedDescriptionKey: "Save data encoding error"])
-        }
-        do {
-            try saveGame.write(to: saveURL)
-        } catch {
-            throw NSError(domain: "com.example.sudoku", code: 2, userInfo: [NSLocalizedDescriptionKey: "Error writing save data to file: \(error)"])
-        }
-    }
-       
-    // MARK: - Load Files TODO
-    
-    func loadLocalStorage() throws -> SudokuData {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let loadURL = documentsDirectory.appendingPathComponent("sudoku_save").appendingPathExtension("plist")
-
-        do {
-            let data = try Data(contentsOf: loadURL)
-            let decoder = PropertyListDecoder()
-            let loadedData = try decoder.decode(SudokuData.self, from: data)
-            try FileManager.default.removeItem(at: loadURL)
-            return loadedData
-        } catch let error {
-            throw NSError(domain: "com.example.sudoku", code: 1, userInfo: [NSLocalizedDescriptionKey: "Error loading save data: \(error.localizedDescription)"])
         }
     }
 

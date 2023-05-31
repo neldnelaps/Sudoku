@@ -6,9 +6,9 @@
 //
 
 import Foundation
-
-
-enum GameDifficulty: String, Codable  {
+import RealmSwift
+                           
+@objc enum GameDifficulty: Int, RealmEnum {
     case light
     case average
     case hard

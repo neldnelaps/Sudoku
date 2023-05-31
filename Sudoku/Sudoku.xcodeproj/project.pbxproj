@@ -20,6 +20,13 @@
 		75045B522A1A6DF100139CCD /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B512A1A6DF100139CCD /* SudokuView.swift */; };
 		7560A2E72A22504900D4A027 /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E62A22504900D4A027 /* GameDifficulty.swift */; };
 		7560A2E92A24D47400D4A027 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E82A24D47400D4A027 /* LevelGenerator.swift */; };
+		7560A2EF2A26506C00D4A027 /* RealmRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2EE2A26506C00D4A027 /* RealmRepositoryProtocol.swift */; };
+		7560A2F22A26516C00D4A027 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2F12A26516C00D4A027 /* RealmRepository.swift */; };
+		7560A2F52A26545A00D4A027 /* RealmUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2F42A26545A00D4A027 /* RealmUsecase.swift */; };
+		7560A2F72A26566D00D4A027 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2F62A26566D00D4A027 /* MainViewModel.swift */; };
+		7560A2F92A2657C700D4A027 /* ContainerDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2F82A2657C700D4A027 /* ContainerDI.swift */; };
+		7560A2FB2A2658EF00D4A027 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2FA2A2658EF00D4A027 /* ViewControllerExtension.swift */; };
+		7560A2FD2A26596E00D4A027 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2FC2A26596E00D4A027 /* GameViewModel.swift */; };
 		7563E8A22A1B7EEB00B23764 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A12A1B7EEB00B23764 /* MainViewController.swift */; };
 		7563E8A62A1B807700B23764 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A52A1B807700B23764 /* MainTabBarController.swift */; };
 		7563E8B32A1B817600B23764 /* DailyChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */; };
@@ -69,6 +76,13 @@
 		75045B512A1A6DF100139CCD /* SudokuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
 		7560A2E62A22504900D4A027 /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		7560A2E82A24D47400D4A027 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		7560A2EE2A26506C00D4A027 /* RealmRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryProtocol.swift; sourceTree = "<group>"; };
+		7560A2F12A26516C00D4A027 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		7560A2F42A26545A00D4A027 /* RealmUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUsecase.swift; sourceTree = "<group>"; };
+		7560A2F62A26566D00D4A027 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		7560A2F82A2657C700D4A027 /* ContainerDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerDI.swift; sourceTree = "<group>"; };
+		7560A2FA2A2658EF00D4A027 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		7560A2FC2A26596E00D4A027 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		7563E8A12A1B7EEB00B23764 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7563E8A52A1B807700B23764 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengesViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				7563E8B92A1B894A00B23764 /* Application */,
-				75045B4E2A1A6DAB00139CCD /* Game */,
+				7560A2EC2A26502B00D4A027 /* Data */,
+				7560A2EA2A264FFC00D4A027 /* Domain */,
 				7563E8A32A1B804B00B23764 /* Presentation */,
 				7563E8BA2A1B895C00B23764 /* Resources */,
 			);
@@ -164,7 +179,17 @@
 			path = SudokuUITests;
 			sourceTree = "<group>";
 		};
-		75045B4E2A1A6DAB00139CCD /* Game */ = {
+		7560A2EA2A264FFC00D4A027 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2ED2A26505300D4A027 /* Repositories */,
+				7560A2EB2A26500800D4A027 /* Entities */,
+				7560A2F32A26542800D4A027 /* Usecases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7560A2EB2A26500800D4A027 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				75045B4F2A1A6DB800139CCD /* SudokuClass.swift */,
@@ -172,7 +197,39 @@
 				7560A2E62A22504900D4A027 /* GameDifficulty.swift */,
 				7560A2E82A24D47400D4A027 /* LevelGenerator.swift */,
 			);
-			path = Game;
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		7560A2EC2A26502B00D4A027 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2F02A26515400D4A027 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7560A2ED2A26505300D4A027 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2EE2A26506C00D4A027 /* RealmRepositoryProtocol.swift */,
+			);
+			name = Repositories;
+			sourceTree = "<group>";
+		};
+		7560A2F02A26515400D4A027 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2F12A26516C00D4A027 /* RealmRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		7560A2F32A26542800D4A027 /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2F42A26545A00D4A027 /* RealmUsecase.swift */,
+			);
+			name = Usecases;
 			sourceTree = "<group>";
 		};
 		7563E89E2A1B7E6F00B23764 /* Main */ = {
@@ -223,6 +280,8 @@
 		7563E8A72A1B80C700B23764 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7560A2F62A26566D00D4A027 /* MainViewModel.swift */,
+				7560A2FC2A26596E00D4A027 /* GameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -258,6 +317,7 @@
 			children = (
 				75045B1B2A1A6CDC00139CCD /* AppDelegate.swift */,
 				75045B1D2A1A6CDC00139CCD /* SceneDelegate.swift */,
+				7560A2F82A2657C700D4A027 /* ContainerDI.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -286,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				7563E8C12A1B8B7400B23764 /* String.swift */,
+				7560A2FA2A2658EF00D4A027 /* ViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -559,9 +620,16 @@
 				75045B1C2A1A6CDC00139CCD /* AppDelegate.swift in Sources */,
 				7563E8C22A1B8B7400B23764 /* String.swift in Sources */,
 				75045B262A1A6CDC00139CCD /* Sudoku.xcdatamodeld in Sources */,
+				7560A2F22A26516C00D4A027 /* RealmRepository.swift in Sources */,
+				7560A2F52A26545A00D4A027 /* RealmUsecase.swift in Sources */,
 				7560A2E72A22504900D4A027 /* GameDifficulty.swift in Sources */,
+				7560A2FD2A26596E00D4A027 /* GameViewModel.swift in Sources */,
+				7560A2F92A2657C700D4A027 /* ContainerDI.swift in Sources */,
+				7560A2F72A26566D00D4A027 /* MainViewModel.swift in Sources */,
 				7563E8A62A1B807700B23764 /* MainTabBarController.swift in Sources */,
+				7560A2EF2A26506C00D4A027 /* RealmRepositoryProtocol.swift in Sources */,
 				75045B522A1A6DF100139CCD /* SudokuView.swift in Sources */,
+				7560A2FB2A2658EF00D4A027 /* ViewControllerExtension.swift in Sources */,
 				75045B502A1A6DB800139CCD /* SudokuClass.swift in Sources */,
 				7563E8B62A1B81C500B23764 /* StatisticsViewController.swift in Sources */,
 				7563E8B32A1B817600B23764 /* DailyChallengesViewController.swift in Sources */,

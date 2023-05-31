@@ -143,8 +143,8 @@ class SudokuView: UIView {
         for row in 0 ..< 9 {
             for col in 0 ..< 9 {
                 var number : Int
-                if puzzle.userEntry(row: row, column: col) != 0 {
-                    number = puzzle.userEntry(row: row, column: col)
+                if puzzle.userEntry(row: row, col: col) != 0 {
+                    number = puzzle.userEntry(row: row, col: col)
                 } else {
                     number = puzzle.numberAt(row: row, column: col)
                 }
@@ -154,7 +154,7 @@ class SudokuView: UIView {
                         attributes = fixedAttributes
                     } else if puzzle.isConflictingEntryAt(row: row, column: col) {
                         attributes = conflictAttributes
-                    } else if puzzle.userEntry(row: row, column: col) != 0 {
+                    } else if puzzle.userEntry(row: row, col: col) != 0 {
                         attributes = userAttributes
                     }
                     let text = "\(number)" as NSString

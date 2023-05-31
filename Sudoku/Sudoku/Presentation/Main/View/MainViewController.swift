@@ -8,15 +8,22 @@
 import SnapKit
 import Foundation
 import UIKit
+import RxSwift
 
 class MainViewController: UIViewController {
-
+    
+    private var viewModel: MainViewModel!
+    private var bag = DisposeBag()
+    
     var newGameButton = UIButton(type: .system)
     var continueGameButton = UIButton(type: .system)
     var alert = UIAlertController(title: "Select difficulty".localized(), message: "", preferredStyle: .actionSheet)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = container.resolve(MainViewModel.self)!
+        
         createNewGame()
         createContinueGameButton()
         createAlert()
@@ -74,12 +81,13 @@ class MainViewController: UIViewController {
     @IBAction func continueGameTapped(_ sender: UIButton) {
         // Try to load saved game data from local storage
         do {
-            let load = try appDelegate.loadLocalStorage() // TODO
-            appDelegate.sudoku.grid = load
+            guard let load = viewModel.loadSudoku() else {return}
+            
+            appDelegate.sudoku = load
             self.show(GameViewController(), sender: self)
         } catch {
             // If no saved game exists, check if there is a game in progress
-            if appDelegate.sudoku.inProgress {
+            if appDelegate.sudoku.inProgress ?? false {
                 self.show(GameViewController(), sender: self)
             } else {
                 // If no saved game and no game in progress, show an alert
@@ -123,12 +131,15 @@ class MainViewController: UIViewController {
     
     private func setupGridShow(gameDiff: GameDifficulty)
     {
-        let puzzle = self.appDelegate.sudoku
+        viewModel.removeSudoku()
+        
+        let puzzle = SudokuClass()
         puzzle.grid.gameDiff = gameDiff
         puzzle.levelGrid = LevelGenerator()
-        puzzle.levelGrid.gameGeneratorByDifficulty(difficulty: gameDiff)
-        puzzle.grid.plistPuzzle = puzzle.levelGrid.grid
+        puzzle.levelGrid?.gameGeneratorByDifficulty(difficulty: gameDiff)
+        puzzle.grid.plistPuzzle = puzzle.levelGrid!.gridToSolve
         self.appDelegate.sudoku = puzzle
+        
         self.show(GameViewController(), sender: self)
     }
     
