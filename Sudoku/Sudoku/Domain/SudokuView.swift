@@ -30,20 +30,22 @@ class SudokuView: UIView {
         let col = Int((tapPoint.x - gridOrigin.x)/d)
         let row = Int((tapPoint.y - gridOrigin.y)/d)
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let puzzle = appDelegate.sudoku
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let puzzle = appDelegate.sudoku
         
         if  0 <= col && col < 9 && 0 <= row && row < 9 {              // if inside puzzle bounds
-            if (!puzzle.numberIsFixedAt(row: row, column: col)) {       // and not a "fixed number"
+//            if (!puzzle.numberIsFixedAt(row: row, column: col)) {       // and not a "fixed number"
                 if (row != selected.row || col != selected.column) {  // and not already selected
                     selected.row = row                                // then select cell
                     selected.column = col
                     setNeedsDisplay()                                 // request redraw ***** PuzzleView
                 }
-            }
-            else {
-                //TODO grid.plistPuzzle[row][column]
-            }
+//            }
+//            else {
+//                var item =
+//
+//                TODO grid.plistPuzzle[row][column]
+//            }
         }
     }
     
@@ -69,9 +71,16 @@ class SudokuView: UIView {
         //
         if selected.row >= 0 && selected.column >= 0 {
             UIColor.systemBlue.withAlphaComponent(0.2).setFill()
-            let x = gridOrigin.x + CGFloat(selected.column)*d
-            let y = gridOrigin.y + CGFloat(selected.row)*d
-            context?.fill(CGRect(x: x, y: y, width: d, height: d))
+            
+            for i in 0 ..< 9 {
+                let x1 = gridOrigin.x + CGFloat(i)*d
+                let y1 = gridOrigin.y + CGFloat(selected.row)*d
+                context?.fill(CGRect(x: x1, y: y1, width: d, height: d))
+                
+                let x2 = gridOrigin.x + CGFloat(selected.column)*d
+                let y2 = gridOrigin.y + CGFloat(i)*d
+                context?.fill(CGRect(x: x2, y: y2, width: d, height: d))
+            }
         }
         
         //
