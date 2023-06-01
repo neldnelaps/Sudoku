@@ -22,10 +22,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel = container.resolve(GameViewModel.self)!
-        
         PencilOn = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
-    
+            
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -37,6 +38,14 @@ class GameViewController: UIViewController {
                 fatalError("Error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    @objc func appWillResignActive() {
+        viewModel.saveSudoku(sudoku: appDelegate.sudoku)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     @IBAction func clearCell(_ sender: Any) {
@@ -89,7 +98,6 @@ class GameViewController: UIViewController {
     func refresh() {
         sudokuView.setNeedsDisplay()
     }
-    
     
     /*
     // MARK: - Navigation

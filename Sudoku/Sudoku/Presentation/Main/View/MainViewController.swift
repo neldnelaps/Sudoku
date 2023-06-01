@@ -123,6 +123,12 @@ class MainViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Start again".localized(), style: .destructive , handler:{ (UIAlertAction)in
             print("User click Start again")
+            let puzzle = self.appDelegate.sudoku
+            puzzle.grid.userPuzzle = Grid()
+            puzzle.grid.userPuzzle?.fillWithZeros(num: 9)
+            self.appDelegate.sudoku = puzzle
+
+            self.show(GameViewController(), sender: self)
         }))
         alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler:{ (UIAlertAction)in
             print("User click Cancel")
