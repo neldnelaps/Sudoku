@@ -30,29 +30,31 @@ class SudokuView: UIView {
         let col = Int((tapPoint.x - gridOrigin.x)/d)
         let row = Int((tapPoint.y - gridOrigin.y)/d)
         
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let puzzle = appDelegate.sudoku
-        
         if  0 <= col && col < 9 && 0 <= row && row < 9 {              // if inside puzzle bounds
-//            if (!puzzle.numberIsFixedAt(row: row, column: col)) {       // and not a "fixed number"
-                if (row != selected.row || col != selected.column) {  // and not already selected
-                    selected.row = row                                // then select cell
-                    selected.column = col
-                    setNeedsDisplay()                                 // request redraw ***** PuzzleView
-                }
-//            }
-//            else {
-//                var item =
-//
-//                TODO grid.plistPuzzle[row][column]
-//            }
+            if (row != selected.row || col != selected.column) {  // and not already selected
+                selected.row = row                                // then select cell
+                selected.column = col
+                setNeedsDisplay()                                 // request redraw ***** PuzzleView
+            }
         }
     }
     
-    //
-    // Draw sudoku board. The current puzzle state is stored in the "sudoku" property
-    // stored in the app delegate.
-    //
+    /// Заполнить цветом выбранную ячейку
+    /// - Parameters:
+    ///   - context: Среда рисования Quartz 2D.
+    ///   - gridOrigin: Сетка
+    ///   - row: Номер строки ячейки.
+    ///   - column: Номер столбца ячейки.
+    ///   - d: Переменная представляет собой размер одной ячейки в сетке (ширина и высота)
+    func fillSelectedCell(context: CGContext?, gridOrigin: CGPoint, row: Int, column: Int, d: CGFloat) {
+        let x = gridOrigin.x + CGFloat(row)*d
+        let y = gridOrigin.y + CGFloat(column)*d
+        context?.fill(CGRect(x: x, y: y, width: d, height: d))
+    }
+    
+    /// Рисуем доску для судоку. Текущее состояние головоломки хранится в свойстве sudoku в делегате приложения
+    /// - Parameters:
+    ///   - rect - это прямоугольник, в который должна быть нарисована сетка. Он представляет собой область экрана, в которой будет отображаться содержимое представления.
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         
@@ -65,7 +67,6 @@ class SudokuView: UIView {
         let delta = gridSize/3
         let d = delta/3
 
-        
         //
         // Fill selected cell (is one is selected).
         //
@@ -73,13 +74,33 @@ class SudokuView: UIView {
             UIColor.systemBlue.withAlphaComponent(0.2).setFill()
             
             for i in 0 ..< 9 {
-                let x1 = gridOrigin.x + CGFloat(i)*d
-                let y1 = gridOrigin.y + CGFloat(selected.row)*d
-                context?.fill(CGRect(x: x1, y: y1, width: d, height: d))
-                
-                let x2 = gridOrigin.x + CGFloat(selected.column)*d
-                let y2 = gridOrigin.y + CGFloat(i)*d
-                context?.fill(CGRect(x: x2, y: y2, width: d, height: d))
+                fillSelectedCell(context: context, gridOrigin: gridOrigin, row: i, column: selected.row, d: d)
+                fillSelectedCell(context: context, gridOrigin: gridOrigin, row: selected.column, column: i, d: d)
+            }
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            guard let grid = appDelegate.sudoku.grid else {return}
+           
+            let plistValue = grid.plistPuzzle?.rows[selected.row].values[selected.column] ?? 0
+            let userValue = grid.userPuzzle?.rows[selected.row].values[selected.column] ?? 0
+
+            let item = plistValue == 0 ? userValue : plistValue
+            
+            if item != 0 {
+                for i in 0 ..< 9 {
+                    guard let plistRow = grid.plistPuzzle?.rows[i],
+                          let userRow = grid.userPuzzle?.rows[i] else {
+                        continue
+                    }
+                    
+                    if let index1 = plistRow.values.index(of: item) {
+                        fillSelectedCell(context: context, gridOrigin: gridOrigin, row: index1, column: i, d: d)
+                    }
+                    
+                    if let index2 = userRow.values.index(of: item) {
+                        fillSelectedCell(context: context, gridOrigin: gridOrigin, row: index2, column: i, d: d)
+                    }
+                }
             }
         }
         
@@ -141,7 +162,7 @@ class SudokuView: UIView {
         let font = UIFont(name: fontName, size: fontSize)
         let pencilFont = UIFont(name: pencilFontName, size: fontSize/3)
         
-        let fixedAttributes = [NSAttributedString.Key.font : font!/*boldFont!*/, NSAttributedString.Key.foregroundColor : UIColor.black]
+        let fixedAttributes = [NSAttributedString.Key.font : font!, NSAttributedString.Key.foregroundColor : UIColor.black]
         let userAttributes = [NSAttributedString.Key.font : font!, NSAttributedString.Key.foregroundColor : UIColor.blue]
         let conflictAttributes = [NSAttributedString.Key.font : font!, NSAttributedString.Key.foregroundColor : UIColor.red]
         let pencilAttributes = [NSAttributedString.Key.font : pencilFont!, NSAttributedString.Key.foregroundColor : UIColor.black]
