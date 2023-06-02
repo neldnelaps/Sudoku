@@ -50,6 +50,7 @@ class LevelGenerator : Object {
         swapRowsArea()
         swapColumsSmall()
         
+        level = difficulty
         var count: Int
         switch difficulty {
         case .light:

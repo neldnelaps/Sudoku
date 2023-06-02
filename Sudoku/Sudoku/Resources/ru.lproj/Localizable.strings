@@ -6,26 +6,29 @@
   
 */
 // MARK: Tabs
-"Daily Challenge"           ="Ежедневное испытание";
-"Main"                      ="Главная";
-"Statistics"                ="Статистика";
+"Daily Challenge"               ="Ежедневное испытание";
+"Main"                          ="Главная";
+"Statistics"                    ="Статистика";
 
 // MARK: MainController
-"New game"                  ="Новая игра";
-"Continue game"             ="Продолжить игру";
+"New game"                      ="Новая игра";
+"Continue game"                 ="Продолжить игру";
 
 // MARK: MainController UIAlertController
-"Select difficulty"         ="Выберите сложность";
-"Light"                     ="Легкая";
-"Average"                   ="Средняя";
-"Hard"                      ="Сложная";
-"Expert"                    ="Экспертная";
-"Crazy"                     ="Безумная";
-"Start again"               ="Начать заново";
-"Cancel"                    ="Отмена";
+"Select difficulty"             ="Выберите сложность";
+"Light"                         ="Легкая";
+"Average"                       ="Средняя";
+"Hard"                          ="Сложная";
+"Expert"                        ="Экспертная";
+"Crazy"                         ="Безумная";
+"Start again"                   ="Начать заново";
+"Cancel"                        ="Отмена";
 
 // MARK: GameViewController
-"Sudoku"                    ="Судоку";
+"Sudoku"                        ="Судоку";
+"Game over!"                    ="Игра закончена!";
+"Errors: "                      ="Ошибки: ";
+"You made more than 3 mistakes" ="Вы допустили больше 3 ошибок";
 
 // MARK: StatisticsController
 

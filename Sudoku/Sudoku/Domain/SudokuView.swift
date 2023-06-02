@@ -30,11 +30,11 @@ class SudokuView: UIView {
         let col = Int((tapPoint.x - gridOrigin.x)/d)
         let row = Int((tapPoint.y - gridOrigin.y)/d)
         
-        if  0 <= col && col < 9 && 0 <= row && row < 9 {              // if inside puzzle bounds
+        if  0 <= col && col < 9 && 0 <= row && row < 9 {          // if inside puzzle bounds
             if (row != selected.row || col != selected.column) {  // and not already selected
                 selected.row = row                                // then select cell
                 selected.column = col
-                setNeedsDisplay()                                 // request redraw ***** PuzzleView
+                setNeedsDisplay()
             }
         }
     }
@@ -193,24 +193,9 @@ class SudokuView: UIView {
                     let y = gridOrigin.y + CGFloat(row)*d + 0.5*(d - textSize.height)
                     let textRect = CGRect(x: x, y: y, width: textSize.width, height: textSize.height)
                     text.draw(in: textRect, withAttributes: attributes)
-                } else if puzzle.anyPencilSetAt(row: row, column: col) {
-                    let s = d/3
-                    for n in 1 ... 9 {
-                        if puzzle.isSetPencil(n: n, row: row, column: col) {
-                            let r = (n - 1) / 3
-                            let c = (n - 1) % 3
-                            let text : NSString = "\(n)" as NSString
-                            let textSize = text.size(withAttributes: pencilAttributes)
-                            let x = gridOrigin.x + CGFloat(col)*d + CGFloat(c)*s + 0.5*(s - textSize.width)
-                            let y = gridOrigin.y + CGFloat(row)*d + CGFloat(r)*s + 0.5*(s - textSize.height)
-                            let textRect = CGRect(x: x, y: y, width: textSize.width, height: textSize.height)
-                            text.draw(in: textRect, withAttributes: pencilAttributes)
-                        }
-                    }
                 }
             }
         }
-        
     }
 
 }

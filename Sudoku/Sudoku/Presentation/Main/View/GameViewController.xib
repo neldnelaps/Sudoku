@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="Sudoku" customModuleProvider="target">
             <connections>
+                <outlet property="difficultyLabel" destination="wjW-ch-yA7" id="JJa-aS-YTP"/>
+                <outlet property="errorLabel" destination="YHJ-BV-iS9" id="7b4-ij-6RQ"/>
                 <outlet property="sudokuView" destination="Zoa-Bq-rZi" id="v1N-ag-eN2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,8 +23,31 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mr-vq-0oH">
                     <rect key="frame" x="16" y="75" width="361" height="32"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4h-oH-2RG">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="32"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Легкая" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjW-ch-yA7">
+                                    <rect key="frame" x="0.0" y="0.0" width="46.333333333333336" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Ошибки: 1/3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHJ-BV-iS9">
+                                    <rect key="frame" x="46.333333333333343" y="0.0" width="314.66666666666663" height="32"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="m4h-oH-2RG" secondAttribute="bottom" id="04z-J3-rFZ"/>
+                        <constraint firstItem="m4h-oH-2RG" firstAttribute="top" secondItem="7mr-vq-0oH" secondAttribute="top" id="AdC-iq-D19"/>
+                        <constraint firstAttribute="trailing" secondItem="m4h-oH-2RG" secondAttribute="trailing" id="agY-b8-P3m"/>
+                        <constraint firstItem="m4h-oH-2RG" firstAttribute="leading" secondItem="7mr-vq-0oH" secondAttribute="leading" id="mq1-wQ-gTC"/>
                         <constraint firstAttribute="height" constant="32" id="nST-5H-zwe"/>
                     </constraints>
                 </view>

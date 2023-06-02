@@ -13,7 +13,6 @@ import RealmSwift
 class SudokuData: Object {
     @objc dynamic var gameDiff: GameDifficulty = .average
     @Persisted var plistPuzzle: Grid? = Grid()
-    //TODO var pencilPuzzle: [[[Bool]]] = [[[Bool]]] (repeating: [[Bool]] (repeating: [Bool] (repeating: false, count: 10), count: 9), count: 9) // penciled values - 3x array of booleans
     @Persisted var userPuzzle: Grid? = Grid()
     
     override init() {
@@ -22,7 +21,6 @@ class SudokuData: Object {
         userPuzzle?.fillWithZeros(num: num)
         plistPuzzle?.fillWithZeros(num: num)
     }
-
 }
 
 class SudokuClass : Object {
@@ -32,6 +30,7 @@ class SudokuClass : Object {
     @Persisted var inProgress: Bool? = false
     @Persisted var grid: SudokuData! = SudokuData()
     @Persisted var levelGrid: LevelGenerator? = LevelGenerator()
+    @Persisted var countError: Int = 0
 
      override class func primaryKey() -> String? {
           return "uniqueKey"
@@ -63,35 +62,11 @@ class SudokuClass : Object {
     func isConflictingEntryAt(row : Int, column: Int) -> Bool  {
         if let item = grid.userPuzzle?.rows[row].values[column] {
             if levelGrid?.gridDefault?.rows[row].values[column] != item {
+               //TODO countError += 1
                 return true
             }
         }
         
-        return false
-    }
-    
-    /// Записаны ли какие-либо значения в данной ячейке?
-    /// - Parameters:
-    ///   - row: Номер строки ячейки.
-    ///   - column: Номер столбца ячейки.
-    /// - Returns: true, если число в ячейке есть значение, false в противном случае.
-    func anyPencilSetAt(row : Int, column : Int) -> Bool {
-//        for n in 0...8 {
-//            if grid.pencilPuzzle[row][column][n] == true {
-//                return true
-//            }
-//        } TOCO
-        return false
-    }
-        
-    /// Начертано ли карандашом значение n?
-    /// - Parameters:
-    ///   - n: Цифра.
-    ///   - row: Номер строки ячейки.
-    ///   - column: Номер столбца ячейки.
-    /// - Returns: true, если число в ячейке начерчено, false в противном случае.
-    func isSetPencil(n : Int, row : Int, column : Int) -> Bool {
-        //TODO return grid.pencilPuzzle[row][column][n]
         return false
     }
     
@@ -135,23 +110,9 @@ class SudokuClass : Object {
        
     }
     
-    // setter - reverse
-    func pencilGrid(n: Int, row: Int, col: Int) {
-        //TODO grid.pencilPuzzle[row][col][n] = !grid.pencilPuzzle[row][col][n]
-    }
-
-    // setter - blank
-    func pencilGridBlank(n: Int, row: Int, col: Int) {
-        //TODO grid.pencilPuzzle[row][col][n] = false
-    }
-    
     func clearPlistPuzzle() {
         guard let count = grid.plistPuzzle?.rows.count else {return}
         grid.plistPuzzle?.fillWithZeros(num: count)
-    }
-    
-    func clearPencilPuzzle() {
-        //TODO grid.pencilPuzzle = [[[Bool]]] (repeating: [[Bool]] (repeating: [Bool] (repeating: false, count: 10), count: 9), count: 9)
     }
     
     func clearUserPuzzle() {
@@ -169,10 +130,24 @@ class SudokuClass : Object {
         }
     }
     
-    func gameInProgress(set: Bool) {
-        try! Realm().write {
-            inProgress = set
+    /// Устанавливает inProgress = true, если игра завершена успешно, иначе false
+    func gameInProgress() {
+        for row in 0 ..< 9 {
+            for col in 0 ..< 9 {
+                if grid.plistPuzzle?.rows[row].values[col] == 0 {
+                    if grid.userPuzzle?.rows[row].values[col] == 0 {
+                        inProgress = false
+                        return
+                    }
+                    if grid.userPuzzle?.rows[row].values[col] != levelGrid?.gridDefault?.rows[row].values[col] {
+                        inProgress = false
+                        return
+                    }
+                }
+            }
         }
+        
+        inProgress = true
     }
 
 }

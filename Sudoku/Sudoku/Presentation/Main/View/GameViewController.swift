@@ -14,16 +14,18 @@ class GameViewController: UIViewController {
     private var bag = DisposeBag()
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var PencilOn = false
     
     @IBOutlet weak var sudokuView: SudokuView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var difficultyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel = container.resolve(GameViewModel.self)!
-        PencilOn = false
         
+        difficultyLabel.text = appDelegate.sudoku.levelGrid?.level.toString()
+        gameOver()
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
             
@@ -59,44 +61,47 @@ class GameViewController: UIViewController {
         if grid?.userPuzzle?.rows[row].values[col] != 0 {
             appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
         }
-        
-        for i in 0...9 {
-            appDelegate.sudoku.pencilGridBlank(n: i, row: row, col: col)
-        }
-        refresh()
-    }
     
-    @IBAction func pencilOn(_ sender: UIButton) {
-        PencilOn = !PencilOn
-        sender.isSelected = PencilOn
+        refresh()
     }
 
     // MARK: - Keypad
     @IBAction func Keypad(_ sender: UIButton) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let puzzle = self.appDelegate.sudoku
-        puzzle.gameInProgress(set: true)
         let grid = appDelegate.sudoku.grid
         let row = sudokuView.selected.row
         let col = sudokuView.selected.column
         if (row != -1 && col != -1) {
-            if PencilOn == false {
-                if grid?.plistPuzzle?.rows[row].values[col] == 0 && grid?.userPuzzle?.rows[row].values[col] == 0  {
-                    appDelegate.sudoku.userGrid(n: sender.tag, row: row, col: col)
-                    refresh()
-                } else if grid?.plistPuzzle?.rows[row].values[col] == 0 || grid?.userPuzzle?.rows[row].values[col] == sender.tag {
-                    appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
-                    refresh()
-                }
-            } else {
-                appDelegate.sudoku.pencilGrid(n: sender.tag, row: row, col: col)
+            if grid?.plistPuzzle?.rows[row].values[col] == 0 && grid?.userPuzzle?.rows[row].values[col] == 0  {
+                appDelegate.sudoku.userGrid(n: sender.tag, row: row, col: col)
+                refresh()
+            } else if grid?.plistPuzzle?.rows[row].values[col] == 0 || grid?.userPuzzle?.rows[row].values[col] == sender.tag {
+                appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
                 refresh()
             }
         }
+        
+        puzzle.gameInProgress()
+        
+        if puzzle.inProgress! {
+            var alert = UIAlertController(title: "Победа после обеда".localized(), message: "Игра закончена", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
+        gameOver()
     }
     
     func refresh() {
         sudokuView.setNeedsDisplay()
+    }
+    
+    func gameOver() {
+        print ("Errors: ".localized() + "\(appDelegate.sudoku.countError)/3")
+        errorLabel.text =  "Errors: ".localized() + "\(appDelegate.sudoku.countError)/3"
+        if appDelegate.sudoku.countError >= 3 {
+            var alert = UIAlertController(title: "Game over!".localized(), message: "You made more than 3 mistakes".localized(), preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     /*
