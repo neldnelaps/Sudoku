@@ -65,13 +65,8 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2Ib-al-soW">
                     <rect key="frame" x="16" y="666" width="361" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFv-2A-hHk">
-                            <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="60"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="arrowshape.bounce.right" catalog="system"/>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4e-FH-Gkb">
-                            <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="60"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="eraser.line.dashed" catalog="system"/>
                             <connections>
@@ -79,7 +74,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpe-3O-FoH">
-                            <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="60"/>
+                            <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="60"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="lamp.desk" catalog="system"/>
                         </button>
@@ -213,7 +208,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="arrowshape.bounce.right" catalog="system" width="128" height="86"/>
         <image name="eraser.line.dashed" catalog="system" width="128" height="96"/>
         <image name="lamp.desk" catalog="system" width="116" height="128"/>
         <systemColor name="systemBackgroundColor">

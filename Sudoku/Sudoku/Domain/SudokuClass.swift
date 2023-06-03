@@ -31,6 +31,7 @@ class SudokuClass : Object {
     @Persisted var grid: SudokuData! = SudokuData()
     @Persisted var levelGrid: LevelGenerator? = LevelGenerator()
     @Persisted var countError: Int = 0
+    @Persisted var numberOfEachDigit = List<Int>()
 
      override class func primaryKey() -> String? {
           return "uniqueKey"
@@ -62,7 +63,6 @@ class SudokuClass : Object {
     func isConflictingEntryAt(row : Int, column: Int) -> Bool  {
         if let item = grid.userPuzzle?.rows[row].values[column] {
             if levelGrid?.gridDefault?.rows[row].values[column] != item {
-               //TODO countError += 1
                 return true
             }
         }
@@ -107,7 +107,6 @@ class SudokuClass : Object {
     func userEntry(row: Int, col: Int) -> Int {
         guard let item = grid.userPuzzle?.rows[row].values[col] else {return 0}
         return item
-       
     }
     
     func clearPlistPuzzle() {
@@ -148,6 +147,28 @@ class SudokuClass : Object {
         }
         
         inProgress = true
+    }
+    
+    /// Cчитает количество цифр в сетке
+    func сountsNumberOfDigitsInGrid() {
+        for i in 1 ..< 10 {
+            let count = levelGrid?.gridToSolve?.rows.reduce(0) { (result, row) -> Int in
+                return result + row.values.filter({$0 == i}).count
+            }
+            numberOfEachDigit.append(count!)
+        }
+        print(numberOfEachDigit)
+    }
+    
+    ///Используется для проверки, сколько раз определенная цифра появляется в объекте userPuzzle с учетом numberOfEachDigit
+    /// - Parameters:
+    ///   - digit: Цифра для проверки
+    /// - Returns: true, если число в сетки встречается 9 раз, false в противном случае.
+    func toСheckDigit(digit: Int) -> Bool {
+        let count = grid?.userPuzzle?.rows.reduce(0) { (result, row) -> Int in
+            return result + row.values.filter({$0 == digit}).count
+        }
+        return numberOfEachDigit[digit - 1] + count! != 9
     }
 
 }

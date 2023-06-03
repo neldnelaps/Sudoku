@@ -144,6 +144,7 @@ class MainViewController: UIViewController {
         puzzle.levelGrid = LevelGenerator()
         puzzle.levelGrid?.gameGeneratorByDifficulty(difficulty: gameDiff)
         puzzle.grid.plistPuzzle = puzzle.levelGrid!.gridToSolve
+        puzzle.сountsNumberOfDigitsInGrid()
         self.appDelegate.sudoku = puzzle
         
         self.show(GameViewController(), sender: self)

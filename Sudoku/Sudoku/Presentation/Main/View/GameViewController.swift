@@ -51,6 +51,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func clearCell(_ sender: Any) {
+        
         let row = sudokuView.selected.row
         let col = sudokuView.selected.column
         if row == -1, col == -1 {
@@ -59,9 +60,14 @@ class GameViewController: UIViewController {
         
         let grid = appDelegate.sudoku.grid
         if grid?.userPuzzle?.rows[row].values[col] != 0 {
+            if let item = grid?.userPuzzle?.rows[row].values[col]{
+                var tmpButton = self.view.viewWithTag(item) as? UIButton
+                tmpButton?.isEnabled = true
+            }
+            
             appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
         }
-    
+        
         refresh()
     }
 
@@ -85,9 +91,12 @@ class GameViewController: UIViewController {
         puzzle.gameInProgress()
         
         if puzzle.inProgress! {
-            var alert = UIAlertController(title: "Победа после обеда".localized(), message: "Игра закончена", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Победа после обеда".localized(), message: "Игра закончена", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
         }
+
+        sender.isEnabled = puzzle.toСheckDigit(digit: sender.tag)
+
         gameOver()
     }
     
@@ -99,7 +108,7 @@ class GameViewController: UIViewController {
         print ("Errors: ".localized() + "\(appDelegate.sudoku.countError)/3")
         errorLabel.text =  "Errors: ".localized() + "\(appDelegate.sudoku.countError)/3"
         if appDelegate.sudoku.countError >= 3 {
-            var alert = UIAlertController(title: "Game over!".localized(), message: "You made more than 3 mistakes".localized(), preferredStyle: .alert)
+            let alert = UIAlertController(title: "Game over!".localized(), message: "You made more than 3 mistakes".localized(), preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
         }
     }
