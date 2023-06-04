@@ -82,7 +82,6 @@ class MainViewController: UIViewController {
         // Try to load saved game data from local storage
         do {
             guard let load = viewModel.loadSudoku() else {return}
-            
             appDelegate.sudoku = load
             self.show(GameViewController(), sender: self)
         } catch {
@@ -125,7 +124,7 @@ class MainViewController: UIViewController {
             print("User click Start again")
             let puzzle = self.appDelegate.sudoku
             puzzle.grid.userPuzzle = Grid()
-            puzzle.grid.userPuzzle?.fillWithZeros(num: 9)
+            puzzle.grid.userPuzzle?.fillWithZeros(num: SizeSudoku.count)
             self.appDelegate.sudoku = puzzle
 
             self.show(GameViewController(), sender: self)
@@ -138,7 +137,7 @@ class MainViewController: UIViewController {
     private func setupGridShow(gameDiff: GameDifficulty)
     {
         viewModel.removeSudoku()
-        
+    
         let puzzle = SudokuClass()
         puzzle.grid.gameDiff = gameDiff
         puzzle.levelGrid = LevelGenerator()

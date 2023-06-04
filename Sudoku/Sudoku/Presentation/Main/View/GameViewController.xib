@@ -90,7 +90,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="1">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="VkV-g8-p3V"/>
@@ -100,7 +100,7 @@
                             <rect key="frame" x="40" y="0.0" width="40.333333333333343" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="2">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="KEB-KH-092"/>
@@ -110,7 +110,7 @@
                             <rect key="frame" x="80.333333333333329" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="3">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="9jb-gK-5hn"/>
@@ -120,7 +120,7 @@
                             <rect key="frame" x="120.33333333333334" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="4">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="489-sm-Abl"/>
@@ -130,7 +130,7 @@
                             <rect key="frame" x="160.33333333333334" y="0.0" width="40.333333333333343" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="5">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="vOM-vm-czh"/>
@@ -140,7 +140,7 @@
                             <rect key="frame" x="200.66666666666666" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="6">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="xQc-fG-3ZH"/>
@@ -150,7 +150,7 @@
                             <rect key="frame" x="240.66666666666669" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="7">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="w8j-oV-A9c"/>
@@ -160,7 +160,7 @@
                             <rect key="frame" x="280.66666666666669" y="0.0" width="40.333333333333314" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="8">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="WJ8-ye-KJW"/>
@@ -170,7 +170,7 @@
                             <rect key="frame" x="321" y="0.0" width="40" height="44"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="9">
-                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="22"/>
+                                <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="26"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="Keypad:" destination="-1" eventType="touchUpInside" id="UAb-Nz-hId"/>

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import RealmSwift
 
-
 class SudokuData: Object {
     @objc dynamic var gameDiff: GameDifficulty = .average
     @Persisted var plistPuzzle: Grid? = Grid()
@@ -17,9 +16,8 @@ class SudokuData: Object {
     
     override init() {
         super.init()
-        let num = 9
-        userPuzzle?.fillWithZeros(num: num)
-        plistPuzzle?.fillWithZeros(num: num)
+        userPuzzle?.fillWithZeros(num: SizeSudoku.count)
+        plistPuzzle?.fillWithZeros(num: SizeSudoku.count)
     }
 }
 
@@ -61,19 +59,17 @@ class SudokuClass : Object {
     ///   - column: Номер столбца ячейки.
     /// - Returns: true, если число конфликтует, false в противном случае.
     func isConflictingEntryAt(row : Int, column: Int) -> Bool  {
-        if let item = grid.userPuzzle?.rows[row].values[column] {
-            if levelGrid?.gridDefault?.rows[row].values[column] != item {
-                return true
-            }
+        if let item = grid.userPuzzle?.rows[row].values[column],
+           let defaultValue = levelGrid?.gridDefault?.rows[row].values[column] {
+            return item != defaultValue
         }
-        
         return false
     }
     
     // load game from plist
     func plistToPuzzle(plist: String, toughness: GameDifficulty) -> [[Int]] {
         // init initial puzzle
-        var puzzle = [[Int]] (repeating: [Int] (repeating: 0, count: 9), count: 9)
+        var puzzle = [[Int]] (repeating: [Int] (repeating: 0, count: SizeSudoku.count), count: SizeSudoku.count)
         // replace . with 0
         let plistZeroed = plist.replacingOccurrences(of: ".", with: "0")
         
@@ -83,10 +79,10 @@ class SudokuClass : Object {
         for c in plistZeroed {
             puzzle[row][col] = Int(String(c))!
             row = row + 1
-            if row == 9 {
+            if row == SizeSudoku.count {
                 row = 0
                 col = col + 1
-                if col == 9 {
+                if col == SizeSudoku.count {
                     return puzzle
                 }
             }
@@ -100,7 +96,6 @@ class SudokuClass : Object {
         try! Realm().write {
             grid.userPuzzle?.rows[row].values[col] = n
         }
-       
     }
     
     // Is the piece a user piece
@@ -131,27 +126,25 @@ class SudokuClass : Object {
     
     /// Устанавливает inProgress = true, если игра завершена успешно, иначе false
     func gameInProgress() {
-        for row in 0 ..< 9 {
-            for col in 0 ..< 9 {
-                if grid.plistPuzzle?.rows[row].values[col] == 0 {
-                    if grid.userPuzzle?.rows[row].values[col] == 0 {
-                        inProgress = false
-                        return
-                    }
-                    if grid.userPuzzle?.rows[row].values[col] != levelGrid?.gridDefault?.rows[row].values[col] {
-                        inProgress = false
-                        return
+        try! Realm().write {
+            for row in 0..<SizeSudoku.count {
+                for col in 0..<SizeSudoku.count {
+                    if let puzzleValue = grid.plistPuzzle?.rows[row].values[col], puzzleValue == 0,
+                       let userValue = grid.userPuzzle?.rows[row].values[col] {
+                        if userValue == 0 || userValue != levelGrid?.gridDefault?.rows[row].values[col] {
+                            inProgress = false
+                            return
+                        }
                     }
                 }
             }
+            inProgress = true
         }
-        
-        inProgress = true
     }
     
     /// Cчитает количество цифр в сетке
     func сountsNumberOfDigitsInGrid() {
-        for i in 1 ..< 10 {
+        for i in 1 ..< SizeSudoku.count + 1 {
             let count = levelGrid?.gridToSolve?.rows.reduce(0) { (result, row) -> Int in
                 return result + row.values.filter({$0 == i}).count
             }
@@ -168,7 +161,7 @@ class SudokuClass : Object {
         let count = grid?.userPuzzle?.rows.reduce(0) { (result, row) -> Int in
             return result + row.values.filter({$0 == digit}).count
         }
-        return numberOfEachDigit[digit - 1] + count! != 9
+        return numberOfEachDigit[digit - 1] + count! != SizeSudoku.count
     }
 
 }

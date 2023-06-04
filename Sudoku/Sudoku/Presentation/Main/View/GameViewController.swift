@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 class GameViewController: UIViewController {
 
@@ -27,6 +28,11 @@ class GameViewController: UIViewController {
         difficultyLabel.text = appDelegate.sudoku.levelGrid?.level.toString()
         gameOver()
         NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        for i in 1 ..< SizeSudoku.count + 1 {
+            guard let tmpButton = self.view.viewWithTag(i) as? UIButton else {continue}
+            tmpButton.isEnabled = appDelegate.sudoku.toСheckDigit(digit: i)
+        }
     }
             
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,7 +57,6 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func clearCell(_ sender: Any) {
-        
         let row = sudokuView.selected.row
         let col = sudokuView.selected.column
         if row == -1, col == -1 {
@@ -61,7 +66,7 @@ class GameViewController: UIViewController {
         let grid = appDelegate.sudoku.grid
         if grid?.userPuzzle?.rows[row].values[col] != 0 {
             if let item = grid?.userPuzzle?.rows[row].values[col]{
-                var tmpButton = self.view.viewWithTag(item) as? UIButton
+                let tmpButton = self.view.viewWithTag(item) as? UIButton
                 tmpButton?.isEnabled = true
             }
             
@@ -73,8 +78,6 @@ class GameViewController: UIViewController {
 
     // MARK: - Keypad
     @IBAction func Keypad(_ sender: UIButton) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let puzzle = self.appDelegate.sudoku
         let grid = appDelegate.sudoku.grid
         let row = sudokuView.selected.row
         let col = sudokuView.selected.column
@@ -88,16 +91,21 @@ class GameViewController: UIViewController {
             }
         }
         
-        puzzle.gameInProgress()
+        appDelegate.sudoku.gameInProgress()
         
-        if puzzle.inProgress! {
+        if appDelegate.sudoku.inProgress! {
             let alert = UIAlertController(title: "Победа после обеда".localized(), message: "Игра закончена", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
         }
 
-        sender.isEnabled = puzzle.toСheckDigit(digit: sender.tag)
-
-        gameOver()
+        sender.isEnabled = appDelegate.sudoku.toСheckDigit(digit: sender.tag)
+        
+        if appDelegate.sudoku.isConflictingEntryAt(row: row, column: col) {
+            try! Realm().write {
+                appDelegate.sudoku.countError += 1
+            }
+            gameOver()
+        }
     }
     
     func refresh() {

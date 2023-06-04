@@ -26,11 +26,11 @@ class SudokuView: UIView {
         let tapPoint = sender.location(in: self)
         let gridSize = (self.bounds.width < self.bounds.height) ? self.bounds.width : self.bounds.height
         let gridOrigin = CGPoint(x: (self.bounds.width - gridSize)/2, y: (self.bounds.height - gridSize)/2)
-        let d = gridSize/9
+        let d = gridSize/CGFloat(SizeSudoku.count)
         let col = Int((tapPoint.x - gridOrigin.x)/d)
         let row = Int((tapPoint.y - gridOrigin.y)/d)
         
-        if  0 <= col && col < 9 && 0 <= row && row < 9 {          // if inside puzzle bounds
+        if  0 <= col && col < SizeSudoku.count && 0 <= row && row < SizeSudoku.count {          // if inside puzzle bounds
             if (row != selected.row || col != selected.column) {  // and not already selected
                 selected.row = row                                // then select cell
                 selected.column = col
@@ -64,8 +64,8 @@ class SudokuView: UIView {
         //
         let gridSize = (self.bounds.width < self.bounds.height) ? self.bounds.width : self.bounds.height
         let gridOrigin = CGPoint(x: (self.bounds.width - gridSize)/2, y: (self.bounds.height - gridSize)/2)
-        let delta = gridSize/3
-        let d = delta/3
+        let delta = gridSize/CGFloat(SizeSudoku.num)
+        let d = delta/CGFloat(SizeSudoku.num)
 
         //
         // Fill selected cell (is one is selected).
@@ -73,7 +73,7 @@ class SudokuView: UIView {
         if selected.row >= 0 && selected.column >= 0 {
             UIColor.systemBlue.withAlphaComponent(0.2).setFill()
             
-            for i in 0 ..< 9 {
+            for i in 0 ..< SizeSudoku.count {
                 fillSelectedCell(context: context, gridOrigin: gridOrigin, row: i, column: selected.row, d: d)
                 fillSelectedCell(context: context, gridOrigin: gridOrigin, row: selected.column, column: i, d: d)
             }
@@ -87,7 +87,7 @@ class SudokuView: UIView {
             let item = plistValue == 0 ? userValue : plistValue
             
             if item != 0 {
-                for i in 0 ..< 9 {
+                for i in 0 ..< SizeSudoku.count {
                     guard let plistRow = grid.plistPuzzle?.rows[i],
                           let userRow = grid.userPuzzle?.rows[i] else {
                         continue
@@ -107,20 +107,20 @@ class SudokuView: UIView {
         //
         // Stroke outer puzzle rectangle
         //
-        context?.setLineWidth(3)
+        context?.setLineWidth(CGFloat(SizeSudoku.num))
         UIColor.gray.setStroke()
         context?.stroke(CGRect(x: gridOrigin.x, y: gridOrigin.y, width: gridSize, height: gridSize))
         
         //
         // Stroke major grid lines.
         //
-        for i in 0 ..< 3 {
+        for i in 0 ..< SizeSudoku.num {
             let x = gridOrigin.x + CGFloat(i)*delta
             context?.move(to: CGPoint(x: x, y: gridOrigin.y))
             context?.addLine(to: CGPoint(x: x, y: gridOrigin.y + gridSize))
             context?.strokePath()
         }
-        for i in 0 ..< 3 {
+        for i in 0 ..< SizeSudoku.num {
             let y = gridOrigin.y + CGFloat(i)*delta
             context?.move(to: CGPoint(x: gridOrigin.x, y: y))
             context?.addLine(to: CGPoint(x: gridOrigin.x + gridSize, y: y))
@@ -131,8 +131,8 @@ class SudokuView: UIView {
         // Stroke minor grid lines.
         //
         context?.setLineWidth(1)
-        for i in 0 ..< 3 {
-            for j in 0 ..< 3 {
+        for i in 0 ..< SizeSudoku.num {
+            for j in 0 ..< SizeSudoku.num {
                 let x = gridOrigin.x + CGFloat(i)*delta + CGFloat(j)*d
                 context?.move(to: CGPoint(x: x, y: gridOrigin.y))
                 context?.addLine(to: CGPoint(x: x, y: gridOrigin.y + gridSize))
@@ -160,7 +160,7 @@ class SudokuView: UIView {
         
         let boldFont = UIFont(name: boldFontName, size: fontSize)
         let font = UIFont(name: fontName, size: fontSize)
-        let pencilFont = UIFont(name: pencilFontName, size: fontSize/3)
+        let pencilFont = UIFont(name: pencilFontName, size: fontSize/CGFloat(SizeSudoku.num))
         
         let fixedAttributes = [NSAttributedString.Key.font : font!, NSAttributedString.Key.foregroundColor : UIColor.black]
         let userAttributes = [NSAttributedString.Key.font : font!, NSAttributedString.Key.foregroundColor : UIColor.blue]
@@ -170,8 +170,8 @@ class SudokuView: UIView {
         //
         // Fill in puzzle numbers.
         //
-        for row in 0 ..< 9 {
-            for col in 0 ..< 9 {
+        for row in 0 ..< SizeSudoku.count {
+            for col in 0 ..< SizeSudoku.count {
                 var number : Int
                 if puzzle.userEntry(row: row, col: col) != 0 {
                     number = puzzle.userEntry(row: row, col: col)

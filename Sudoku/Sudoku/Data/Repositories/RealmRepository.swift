@@ -19,24 +19,18 @@ class BaseRealmRepository {
 class RealmRepository : BaseRealmRepository, RealmRepositoryProtocol {
     
     func saveStorage(sudoku: SudokuClass) {
-        let sudokuLoad = realm.object(ofType: SudokuClass.self, forPrimaryKey: sudoku.description)
-
-         if sudokuLoad != nil {
+        if realm.object(ofType: SudokuClass.self, forPrimaryKey: sudoku.description) != nil {
             return
-         } else {
-             try! realm.write {
-                 realm.create(SudokuClass.self, value: sudoku, update: .modified)
-             }
-         }
+        }
+
+        try! realm.write {
+            realm.create(SudokuClass.self, value: sudoku, update: .modified)
+        }
     }
     
     func loadStorage() -> SudokuClass? {
-        do {
-            let res = realm.object(ofType: SudokuClass.self, forPrimaryKey: SudokuClass.uniqueKey)
-            return res
-        } catch let error as NSError {
-            print("Error load: \(error)")
-        }
+        let res = realm.object(ofType: SudokuClass.self, forPrimaryKey: SudokuClass.uniqueKey)
+        return res
     }
     
     func removeStorage() {

@@ -27,6 +27,8 @@
 		7560A2F92A2657C700D4A027 /* ContainerDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2F82A2657C700D4A027 /* ContainerDI.swift */; };
 		7560A2FB2A2658EF00D4A027 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2FA2A2658EF00D4A027 /* ViewControllerExtension.swift */; };
 		7560A2FD2A26596E00D4A027 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2FC2A26596E00D4A027 /* GameViewModel.swift */; };
+		7560A2FF2A2C6E4400D4A027 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2FE2A2C6E4400D4A027 /* Grid.swift */; };
+		7560A3012A2CD71900D4A027 /* SizeSudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A3002A2CD71900D4A027 /* SizeSudoku.swift */; };
 		7563E8A22A1B7EEB00B23764 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A12A1B7EEB00B23764 /* MainViewController.swift */; };
 		7563E8A62A1B807700B23764 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8A52A1B807700B23764 /* MainTabBarController.swift */; };
 		7563E8B32A1B817600B23764 /* DailyChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */; };
@@ -83,6 +85,8 @@
 		7560A2F82A2657C700D4A027 /* ContainerDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerDI.swift; sourceTree = "<group>"; };
 		7560A2FA2A2658EF00D4A027 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		7560A2FC2A26596E00D4A027 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		7560A2FE2A2C6E4400D4A027 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		7560A3002A2CD71900D4A027 /* SizeSudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeSudoku.swift; sourceTree = "<group>"; };
 		7563E8A12A1B7EEB00B23764 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7563E8A52A1B807700B23764 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7563E8B22A1B817600B23764 /* DailyChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengesViewController.swift; sourceTree = "<group>"; };
@@ -194,8 +198,10 @@
 			children = (
 				75045B4F2A1A6DB800139CCD /* SudokuClass.swift */,
 				75045B512A1A6DF100139CCD /* SudokuView.swift */,
-				7560A2E62A22504900D4A027 /* GameDifficulty.swift */,
 				7560A2E82A24D47400D4A027 /* LevelGenerator.swift */,
+				7560A2E62A22504900D4A027 /* GameDifficulty.swift */,
+				7560A2FE2A2C6E4400D4A027 /* Grid.swift */,
+				7560A3002A2CD71900D4A027 /* SizeSudoku.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -620,6 +626,7 @@
 				75045B1C2A1A6CDC00139CCD /* AppDelegate.swift in Sources */,
 				7563E8C22A1B8B7400B23764 /* String.swift in Sources */,
 				75045B262A1A6CDC00139CCD /* Sudoku.xcdatamodeld in Sources */,
+				7560A2FF2A2C6E4400D4A027 /* Grid.swift in Sources */,
 				7560A2F22A26516C00D4A027 /* RealmRepository.swift in Sources */,
 				7560A2F52A26545A00D4A027 /* RealmUsecase.swift in Sources */,
 				7560A2E72A22504900D4A027 /* GameDifficulty.swift in Sources */,
@@ -629,6 +636,7 @@
 				7563E8A62A1B807700B23764 /* MainTabBarController.swift in Sources */,
 				7560A2EF2A26506C00D4A027 /* RealmRepositoryProtocol.swift in Sources */,
 				75045B522A1A6DF100139CCD /* SudokuView.swift in Sources */,
+				7560A3012A2CD71900D4A027 /* SizeSudoku.swift in Sources */,
 				7560A2FB2A2658EF00D4A027 /* ViewControllerExtension.swift in Sources */,
 				75045B502A1A6DB800139CCD /* SudokuClass.swift in Sources */,
 				7563E8B62A1B81C500B23764 /* StatisticsViewController.swift in Sources */,
