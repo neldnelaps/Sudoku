@@ -9,6 +9,7 @@ import SnapKit
 import Foundation
 import UIKit
 import RxSwift
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class MainViewController: UIViewController {
     
     var newGameButton = UIButton(type: .system)
     var continueGameButton = UIButton(type: .system)
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var alert = UIAlertController(title: "Select difficulty".localized(), message: "", preferredStyle: .actionSheet)
 
     override func viewDidLoad() {
@@ -97,8 +99,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     func random(_ n:Int) -> Int {
         return Int(arc4random_uniform(UInt32(n)))
     }
@@ -122,20 +122,28 @@ class MainViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Start again".localized(), style: .destructive , handler:{ (UIAlertAction)in
             print("User click Start again")
-            let puzzle = self.appDelegate.sudoku
-            puzzle.grid.userPuzzle = Grid()
-            puzzle.grid.userPuzzle?.fillWithZeros(num: SizeSudoku.count)
-            self.appDelegate.sudoku = puzzle
-
-            self.show(GameViewController(), sender: self)
+            self.startAgain()
         }))
         alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler:{ (UIAlertAction)in
             print("User click Cancel")
         }))
     }
     
-    private func setupGridShow(gameDiff: GameDifficulty)
-    {
+    private func startAgain() {
+        let load = viewModel.loadSudoku()
+        if  load != nil {
+            try! Realm().write{
+                let puzzle = self.appDelegate.sudoku
+                puzzle.grid.userPuzzle = Grid()
+                puzzle.grid.userPuzzle?.fillWithZeros(num: SizeSudoku.count)
+                puzzle.countError = 0
+                self.appDelegate.sudoku = puzzle
+                self.show(GameViewController(), sender: self)
+            }
+        }
+    }
+    
+    private func setupGridShow(gameDiff: GameDifficulty) {
         viewModel.removeSudoku()
     
         let puzzle = SudokuClass()

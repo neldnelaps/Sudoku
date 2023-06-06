@@ -1,4 +1,5 @@
 PODS:
+  - lottie-ios (4.2.0)
   - Realm (10.37.0):
     - Realm/Headers (= 10.37.0)
   - Realm/Headers (10.37.0)
@@ -19,12 +20,14 @@ PODS:
   - Swinject (2.8.3)
 
 DEPENDENCIES:
+  - lottie-ios
   - RxRealm
   - SnapKit
   - Swinject
 
 SPEC REPOS:
   trunk:
+    - lottie-ios
     - Realm
     - RealmSwift
     - RxCocoa
@@ -35,6 +38,7 @@ SPEC REPOS:
     - Swinject
 
 SPEC CHECKSUMS:
+  lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
   Realm: 9c5fc6f8f5cb70b299f2e3064d2b9f6cb0f1523d
   RealmSwift: 7be7bb45911c16400dd1bfce3a01764ecb4cae7a
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -44,6 +48,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
 
-PODFILE CHECKSUM: cbb72e3f681e05ca51addcaa46cb05707d189d06
+PODFILE CHECKSUM: a6eb6e85dc2b076ce1ca4d3d726828c77d14f7f2
 
 COCOAPODS: 1.12.0

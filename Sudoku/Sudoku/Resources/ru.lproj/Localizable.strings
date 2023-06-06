@@ -30,6 +30,11 @@
 "Errors: "                      ="Ошибки: ";
 "You made more than 3 mistakes" ="Вы допустили больше 3 ошибок";
 
+// MARK: WinViewController
+"Victory!"                      ="Победа!";
+"Game: "                        ="Игра: ";
+"Home"                          ="Главная";
+
 // MARK: StatisticsController
 
 // MARK: DailyChallengesController

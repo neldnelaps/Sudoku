@@ -18,6 +18,10 @@
 		75045B422A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B412A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift */; };
 		75045B502A1A6DB800139CCD /* SudokuClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B4F2A1A6DB800139CCD /* SudokuClass.swift */; };
 		75045B522A1A6DF100139CCD /* SudokuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75045B512A1A6DF100139CCD /* SudokuView.swift */; };
+		751D16072A2DDC8800DC4BA0 /* WinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751D16052A2DDC8800DC4BA0 /* WinViewController.swift */; };
+		751D16082A2DDC8800DC4BA0 /* WinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 751D16062A2DDC8800DC4BA0 /* WinViewController.xib */; };
+		751D160A2A2DE5E200DC4BA0 /* win.json in Resources */ = {isa = PBXBuildFile; fileRef = 751D16092A2DE5E200DC4BA0 /* win.json */; };
+		751D160C2A2E180400DC4BA0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751D160B2A2E180400DC4BA0 /* BaseViewController.swift */; };
 		7560A2E72A22504900D4A027 /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E62A22504900D4A027 /* GameDifficulty.swift */; };
 		7560A2E92A24D47400D4A027 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2E82A24D47400D4A027 /* LevelGenerator.swift */; };
 		7560A2EF2A26506C00D4A027 /* RealmRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7560A2EE2A26506C00D4A027 /* RealmRepositoryProtocol.swift */; };
@@ -76,6 +80,10 @@
 		75045B412A1A6CDC00139CCD /* SudokuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		75045B4F2A1A6DB800139CCD /* SudokuClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuClass.swift; sourceTree = "<group>"; };
 		75045B512A1A6DF100139CCD /* SudokuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuView.swift; sourceTree = "<group>"; };
+		751D16052A2DDC8800DC4BA0 /* WinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinViewController.swift; sourceTree = "<group>"; };
+		751D16062A2DDC8800DC4BA0 /* WinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WinViewController.xib; sourceTree = "<group>"; };
+		751D16092A2DE5E200DC4BA0 /* win.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = win.json; sourceTree = "<group>"; };
+		751D160B2A2E180400DC4BA0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7560A2E62A22504900D4A027 /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		7560A2E82A24D47400D4A027 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		7560A2EE2A26506C00D4A027 /* RealmRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -183,6 +191,51 @@
 			path = SudokuUITests;
 			sourceTree = "<group>";
 		};
+		751D15FF2A2DD89900DC4BA0 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				751D16012A2DD8C800DC4BA0 /* ViewModel */,
+				751D16002A2DD8B900DC4BA0 /* View */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		751D16002A2DD8B900DC4BA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				751D16032A2DD93E00DC4BA0 /* Win */,
+				757318B62A1CC5890054D3ED /* GameViewController.swift */,
+				757318B72A1CC5890054D3ED /* GameViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		751D16012A2DD8C800DC4BA0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7560A2FC2A26596E00D4A027 /* GameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		751D16022A2DD8D300DC4BA0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7563E8A72A1B80C700B23764 /* ViewModel */,
+				7563E8AB2A1B80C700B23764 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		751D16032A2DD93E00DC4BA0 /* Win */ = {
+			isa = PBXGroup;
+			children = (
+				751D16052A2DDC8800DC4BA0 /* WinViewController.swift */,
+				751D16062A2DDC8800DC4BA0 /* WinViewController.xib */,
+			);
+			path = Win;
+			sourceTree = "<group>";
+		};
 		7560A2EA2A264FFC00D4A027 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,8 +294,8 @@
 		7563E89E2A1B7E6F00B23764 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7563E8AB2A1B80C700B23764 /* View */,
-				7563E8A72A1B80C700B23764 /* ViewModel */,
+				751D16022A2DD8D300DC4BA0 /* Main */,
+				751D15FF2A2DD89900DC4BA0 /* Game */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -279,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				7563E8A52A1B807700B23764 /* MainTabBarController.swift */,
+				751D160B2A2E180400DC4BA0 /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -287,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				7560A2F62A26566D00D4A027 /* MainViewModel.swift */,
-				7560A2FC2A26596E00D4A027 /* GameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -296,8 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				7563E8A12A1B7EEB00B23764 /* MainViewController.swift */,
-				757318B62A1CC5890054D3ED /* GameViewController.swift */,
-				757318B72A1CC5890054D3ED /* GameViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -331,6 +382,7 @@
 		7563E8BA2A1B895C00B23764 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				751D16092A2DE5E200DC4BA0 /* win.json */,
 				75045B272A1A6CDC00139CCD /* Assets.xcassets */,
 				75045B292A1A6CDC00139CCD /* LaunchScreen.storyboard */,
 				75045B2C2A1A6CDC00139CCD /* Info.plist */,
@@ -490,7 +542,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				751D16082A2DDC8800DC4BA0 /* WinViewController.xib in Resources */,
 				75045B2B2A1A6CDC00139CCD /* LaunchScreen.storyboard in Resources */,
+				751D160A2A2DE5E200DC4BA0 /* win.json in Resources */,
 				7563E8BB2A1B897700B23764 /* Localizable.strings in Resources */,
 				75045B282A1A6CDC00139CCD /* Assets.xcassets in Resources */,
 				757318B92A1CC5890054D3ED /* GameViewController.xib in Resources */,
@@ -626,6 +680,7 @@
 				75045B1C2A1A6CDC00139CCD /* AppDelegate.swift in Sources */,
 				7563E8C22A1B8B7400B23764 /* String.swift in Sources */,
 				75045B262A1A6CDC00139CCD /* Sudoku.xcdatamodeld in Sources */,
+				751D160C2A2E180400DC4BA0 /* BaseViewController.swift in Sources */,
 				7560A2FF2A2C6E4400D4A027 /* Grid.swift in Sources */,
 				7560A2F22A26516C00D4A027 /* RealmRepository.swift in Sources */,
 				7560A2F52A26545A00D4A027 /* RealmUsecase.swift in Sources */,
@@ -641,6 +696,7 @@
 				75045B502A1A6DB800139CCD /* SudokuClass.swift in Sources */,
 				7563E8B62A1B81C500B23764 /* StatisticsViewController.swift in Sources */,
 				7563E8B32A1B817600B23764 /* DailyChallengesViewController.swift in Sources */,
+				751D16072A2DDC8800DC4BA0 /* WinViewController.swift in Sources */,
 				757318B82A1CC5890054D3ED /* GameViewController.swift in Sources */,
 				75045B1E2A1A6CDC00139CCD /* SceneDelegate.swift in Sources */,
 			);

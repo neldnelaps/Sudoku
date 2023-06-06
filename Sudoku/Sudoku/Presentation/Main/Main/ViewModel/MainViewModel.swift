@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import RxSwift
 
 class MainViewModel {
     
     private let realmUsecase: RealmUsecase
-
+    
+//    var sudoku = BehaviorSubject<SudokuClass>(value: SudokuClass())
+//    self.sudoku.onNext(sudoku)
+//    var f = try viewModel.sudoku.value()
+//    print(f.grid.userPuzzle)
+//
+    
     init(realmUsecase: RealmUsecase) {
         self.realmUsecase = realmUsecase
     }

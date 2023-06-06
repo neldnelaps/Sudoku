@@ -19,4 +19,8 @@ class GameViewModel {
         realmUsecase.saveStorage(sudoku: sudoku)
     }
     
+    func removeSudoku() {
+        realmUsecase.removeStorage()
+    }
+    
 }

@@ -40,6 +40,10 @@ class GameViewController: UIViewController {
 
         if self.isMovingFromParent {
             do {
+                if appDelegate.sudoku.countError == 3{
+                    self.viewModel.removeSudoku()
+                    return
+                }
                 viewModel.saveSudoku(sudoku: appDelegate.sudoku)
             } catch {
                 let nserror = error as NSError
@@ -86,7 +90,7 @@ class GameViewController: UIViewController {
                 appDelegate.sudoku.userGrid(n: sender.tag, row: row, col: col)
                 refresh()
             } else if grid?.plistPuzzle?.rows[row].values[col] == 0 || grid?.userPuzzle?.rows[row].values[col] == sender.tag {
-                appDelegate.sudoku.userGrid(n: 0, row: row, col: col)
+                appDelegate.sudoku.userGrid(n: sender.tag, row: row, col: col)
                 refresh()
             }
         }
@@ -94,10 +98,13 @@ class GameViewController: UIViewController {
         appDelegate.sudoku.gameInProgress()
         
         if appDelegate.sudoku.inProgress! {
-            let alert = UIAlertController(title: "Победа после обеда".localized(), message: "Игра закончена", preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
+            let winView = WinViewController()
+            winView.diff = self.appDelegate.sudoku.levelGrid?.level.toString()
+            winView.modalPresentationStyle = .fullScreen
+            present(winView, animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
-
+        
         sender.isEnabled = appDelegate.sudoku.toСheckDigit(digit: sender.tag)
         
         if appDelegate.sudoku.isConflictingEntryAt(row: row, column: col) {
@@ -116,19 +123,70 @@ class GameViewController: UIViewController {
         print ("Errors: ".localized() + "\(appDelegate.sudoku.countError)/3")
         errorLabel.text =  "Errors: ".localized() + "\(appDelegate.sudoku.countError)/3"
         if appDelegate.sudoku.countError >= 3 {
-            let alert = UIAlertController(title: "Game over!".localized(), message: "You made more than 3 mistakes".localized(), preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
+            createAlert()
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //  MARK: Alert
+    func createAlert(){
+        let alert = UIAlertController(title: "Game over!".localized(), message: "You made more than 3 mistakes".localized(), preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Light".localized(), style: .default , handler:{ (UIAlertAction)in
+            self.setupGridShow(gameDiff: .light)
+        }))
+        alert.addAction(UIAlertAction(title: "Average".localized(), style: .default , handler:{ (UIAlertAction)in
+            self.setupGridShow(gameDiff: .average)
+        }))
+        alert.addAction(UIAlertAction(title: "Hard".localized(), style: .default , handler:{ (UIAlertAction)in
+            self.setupGridShow(gameDiff: .hard)
+        }))
+        alert.addAction(UIAlertAction(title: "Expert".localized(), style: .default , handler:{ (UIAlertAction)in
+            self.setupGridShow(gameDiff: .expert)
+        }))
+        alert.addAction(UIAlertAction(title: "Crazy".localized(), style: .default , handler:{ (UIAlertAction)in
+            self.setupGridShow(gameDiff: .crazy)
+        }))
+        alert.addAction(UIAlertAction(title: "Start again".localized(), style: .destructive , handler:{ (UIAlertAction)in
+            print("User click Start again")
+            self.startAgain()
+        }))
+        alert.addAction(UIAlertAction(title: "Home".localized(), style: .cancel , handler:{ (UIAlertAction)in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
     }
-    */
+
+    private func setupGridShow(gameDiff: GameDifficulty) {
+        viewModel.removeSudoku()
+
+        let puzzle = SudokuClass()
+        puzzle.grid.gameDiff = gameDiff
+        puzzle.levelGrid = LevelGenerator()
+        puzzle.levelGrid?.gameGeneratorByDifficulty(difficulty: gameDiff)
+        puzzle.grid.plistPuzzle = puzzle.levelGrid!.gridToSolve
+        puzzle.сountsNumberOfDigitsInGrid()
+        self.appDelegate.sudoku = puzzle
+        
+        updateView()
+    }
+    
+    private func startAgain() {
+        try! Realm().write{
+            let puzzle = self.appDelegate.sudoku
+            puzzle.countError = 0
+            puzzle.grid.userPuzzle = Grid()
+            puzzle.grid.userPuzzle?.fillWithZeros(num: SizeSudoku.count)
+            self.appDelegate.sudoku = puzzle
+            self.updateView()
+        }
+    }
+    
+    func updateView() {
+        self.viewDidLoad()
+        self.view.setNeedsDisplay()
+        refresh()
+    }
 
 }

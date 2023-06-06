@@ -10,6 +10,8 @@ target 'Sudoku' do
   pod 'RxRealm'
 
   pod 'Swinject'
+
+  pod 'lottie-ios'
   
   target 'SudokuTests' do
     inherit! :search_paths
